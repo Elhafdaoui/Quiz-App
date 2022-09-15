@@ -4,20 +4,17 @@ class Quiz {
     this.score = 0;
     this.questions = questions;
     this.questionIndex = 0;
-    var elem = document.getElementById("container");
-      if (elem.requestFullscreen) {
-          console.log("on full screen")
-        elem.requestFullscreen();
-      } else if (elem.webkitRequestFullscreen) { /* Safari */
-        elem.webkitRequestFullscreen();
-      } else if (elem.msRequestFullscreen) { /* IE11 */
-        elem.msRequestFullscreen();
-      }
-      else{
-        console.log("Error occured on full screen")
-      }
+    if(window.event )  
+    {  
+      alert("Browser back button is clicked...");  
+    }  
+  else  
+    { 
+      alert("Page could be exit, after 10 mins...");  
+    }  
   }
-     
+  
+  
   getQuestionIndex() {
     return this.questions[this.questionIndex];
   }
@@ -157,6 +154,12 @@ function againQuiz() {
   window.location.reload();
 }
 
-// Full screen mode for exam tab
-
-
+// Delect tab switching
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState == "visible") {
+    document.getElementById("tabSwitchShow").click()
+    setTimeout(() => {
+      document.getElementById("tabSwitchDismiss").click()
+    }, 60000)
+  }
+});
